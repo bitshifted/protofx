@@ -10,8 +10,17 @@ package co.bitshifted.protofx.core.prefs;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ * A preference entry for integer values.
+ */
 public class IntegerPreferenceEntry extends NumberPreferenceEntry<Integer> {
 
+    /**
+     * Creates a new integer preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
     protected IntegerPreferenceEntry(String root, String name, Integer defaultValue) {
         super(root, name, defaultValue);
     }

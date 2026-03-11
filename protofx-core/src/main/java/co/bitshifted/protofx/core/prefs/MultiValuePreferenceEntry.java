@@ -15,8 +15,18 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 
+/**
+ * A preference entry for a collection of values.
+ * @param <T> the type of the values
+ */
 public class MultiValuePreferenceEntry<T> extends BasePreferenceEntry<Collection<T>> {
 
+    /**
+     * Creates a new multi-value preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
     public MultiValuePreferenceEntry(String root, String name, Collection<T> defaultValue) {
         super(root, name, defaultValue);
     }

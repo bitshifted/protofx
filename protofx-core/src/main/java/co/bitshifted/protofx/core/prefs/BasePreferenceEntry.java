@@ -24,6 +24,12 @@ public abstract  class BasePreferenceEntry<T>  implements PendingValuePreference
     protected final Preferences baseNode;
     protected Optional<T> pendingValue;
 
+    /**
+     * Creates a new base preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
     protected BasePreferenceEntry(String root, String name, T defaultValue) {
         this.name = name;
         this.baseNode = Preferences.userRoot().node(root);
@@ -32,12 +38,28 @@ public abstract  class BasePreferenceEntry<T>  implements PendingValuePreference
         this.pendingValue = Optional.empty();
     }
 
+    /**
+     * Creates a property for the preference.
+     * @param defaultValue the default value
+     * @return the property
+     */
     protected abstract Property<T> createProperty(T defaultValue);
 
+    /**
+     * Saves the current value of the preference.
+     */
     protected abstract void doSave();
 
+    /**
+     * Saves the given value of the preference.
+     * @param value the value to save
+     */
     protected abstract void doSave(T value);
 
+    /**
+     * Returns the current value of the preference.
+     * @return the current value
+     */
     public T getValue() {
         return property.getValue();
     }
@@ -51,6 +73,10 @@ public abstract  class BasePreferenceEntry<T>  implements PendingValuePreference
         doSave();
     }
 
+    /**
+     * Saves the given value of the preference.
+     * @param value the value to save
+     */
     public void save(T value) {
         if(pendingValue.isPresent()) {
             pendingValue = Optional.empty();
@@ -59,6 +85,10 @@ public abstract  class BasePreferenceEntry<T>  implements PendingValuePreference
         property.setValue(value);
     }
 
+    /**
+     * Returns the property for the preference.
+     * @return the property
+     */
     public Property<T> getProperty() {
         return property;
     }

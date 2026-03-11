@@ -10,8 +10,17 @@ package co.bitshifted.protofx.core.prefs;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 
+/**
+ * A preference entry for double values.
+ */
 public class DoublePreferenceEntry extends NumberPreferenceEntry<Double> {
 
+    /**
+     * Creates a new double preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
     protected DoublePreferenceEntry(String root, String name, Double defaultValue) {
         super(root, name, defaultValue);
     }

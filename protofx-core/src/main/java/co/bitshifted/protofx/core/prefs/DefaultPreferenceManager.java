@@ -23,8 +23,12 @@ import java.util.prefs.Preferences;
 public class DefaultPreferenceManager implements PreferenceManager {
 
     private final ApplicationConfig applicationConfig;
-    private final Map<String, Object> preferenceCache;
+    private final Map<String, PendingValuePreference> preferenceCache;
 
+    /**
+     * Creates a new default preference manager.
+     * @param applicationConfig the application configuration
+     */
     @Inject
     public DefaultPreferenceManager(ApplicationConfig applicationConfig) {
         this.applicationConfig = applicationConfig;

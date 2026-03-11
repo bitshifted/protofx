@@ -12,6 +12,10 @@ import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Default implementation of {@link ApplicationConfig}. It provided sensible default configuration,
+ * and is intended to be overriden by application.
+ */
 public class DefaultApplicationConfig implements ApplicationConfig{
 
     public static final String DEFAULT_LOCALE = "en_US";

@@ -7,39 +7,44 @@
  */
 package co.bitshifted.protofx.core.prefs;
 
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.Property;import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.prefs.Preferences;
 
-public class FloatPreferenceEntry {
+/**
+ * A preference entry for float values.
+ */
+public class FloatPreferenceEntry extends NumberPreferenceEntry<Float> {
 
-    private final SimpleFloatProperty property;
-    private final String root;
-    private final String name;
-    private final Preferences baseNode;
-
-    public FloatPreferenceEntry(String root, String name, Float defaultValue) {
-        this.root = root;
-        this.name = name;
-        this.property = new SimpleFloatProperty(defaultValue);
-        this.baseNode = Preferences.userRoot().node(root);
+    /**
+     * Creates a new float preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
+       protected FloatPreferenceEntry(String root, String name, Float defaultValue) {
+        super(root, name, defaultValue);
     }
 
-    public Float getValue() {
-        return property.getValue();
+    @Override
+    protected Property<Number> createProperty(Float defaultValue) {
+        return new SimpleFloatProperty(defaultValue);
     }
 
-    public void save() {
-        baseNode.putFloat(name, property.getValue());
+    @Override
+    protected void doSave() {
+        baseNode.putDouble(name, property.getValue().floatValue());
     }
 
-    public void save(Float value) {
+    @Override
+    protected void doSave(Float value) {
         baseNode.putFloat(name, value);
-        property.setValue(value);
     }
 
-    public SimpleFloatProperty getProperty() {
-        return property;
+    @Override
+    public Float getValue() {
+        return property.getValue().floatValue();
     }
+
 }

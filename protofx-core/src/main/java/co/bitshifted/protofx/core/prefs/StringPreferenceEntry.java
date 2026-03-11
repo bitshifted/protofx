@@ -11,8 +11,17 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 
 
+/**
+ * A preference entry for string values.
+ */
 public class StringPreferenceEntry extends BasePreferenceEntry<String> {
 
+    /**
+     * Creates a new string preference entry.
+     * @param root the root node for the preference
+     * @param name the name of the preference
+     * @param defaultValue the default value if the preference is not set
+     */
     public StringPreferenceEntry(String root, String name, String defaultValue) {
         super(root, name, defaultValue);
     }

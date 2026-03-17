@@ -7,44 +7,40 @@
  */
 package co.bitshifted.protofx.core.prefs;
 
-import javafx.beans.property.Property;import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleFloatProperty;
 
-import java.util.prefs.Preferences;
-
-/**
- * A preference entry for float values.
- */
+/** A preference entry for float values. */
 public class FloatPreferenceEntry extends NumberPreferenceEntry<Float> {
 
-    /**
-     * Creates a new float preference entry.
-     * @param root the root node for the preference
-     * @param name the name of the preference
-     * @param defaultValue the default value if the preference is not set
-     */
-       protected FloatPreferenceEntry(String root, String name, Float defaultValue) {
-        super(root, name, defaultValue);
-    }
+  /**
+   * Creates a new float preference entry.
+   *
+   * @param root the root node for the preference
+   * @param name the name of the preference
+   * @param defaultValue the default value if the preference is not set
+   */
+  protected FloatPreferenceEntry(String root, String name, Float defaultValue) {
+    super(root, name, defaultValue);
+  }
 
-    @Override
-    protected Property<Number> createProperty(Float defaultValue) {
-        return new SimpleFloatProperty(defaultValue);
-    }
+  @Override
+  protected Property<Number> createProperty(Float defaultValue) {
+    return new SimpleFloatProperty(defaultValue);
+  }
 
-    @Override
-    protected void doSave() {
-        baseNode.putDouble(name, property.getValue().floatValue());
-    }
+  @Override
+  protected void doSave() {
+    baseNode.putDouble(name, property.getValue().floatValue());
+  }
 
-    @Override
-    protected void doSave(Float value) {
-        baseNode.putFloat(name, value);
-    }
+  @Override
+  protected void doSave(Float value) {
+    baseNode.putFloat(name, value);
+  }
 
-    @Override
-    public Float getValue() {
-        return property.getValue().floatValue();
-    }
-
+  @Override
+  public Float getValue() {
+    return property.getValue().floatValue();
+  }
 }

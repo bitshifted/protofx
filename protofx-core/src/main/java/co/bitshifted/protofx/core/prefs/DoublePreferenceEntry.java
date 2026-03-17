@@ -10,39 +10,37 @@ package co.bitshifted.protofx.core.prefs;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 
-/**
- * A preference entry for double values.
- */
+/** A preference entry for double values. */
 public class DoublePreferenceEntry extends NumberPreferenceEntry<Double> {
 
-    /**
-     * Creates a new double preference entry.
-     * @param root the root node for the preference
-     * @param name the name of the preference
-     * @param defaultValue the default value if the preference is not set
-     */
-    protected DoublePreferenceEntry(String root, String name, Double defaultValue) {
-        super(root, name, defaultValue);
-    }
+  /**
+   * Creates a new double preference entry.
+   *
+   * @param root the root node for the preference
+   * @param name the name of the preference
+   * @param defaultValue the default value if the preference is not set
+   */
+  protected DoublePreferenceEntry(String root, String name, Double defaultValue) {
+    super(root, name, defaultValue);
+  }
 
-    @Override
-    protected Property<Number> createProperty(Double defaultValue) {
-        return new SimpleDoubleProperty(defaultValue);
-    }
+  @Override
+  protected Property<Number> createProperty(Double defaultValue) {
+    return new SimpleDoubleProperty(defaultValue);
+  }
 
-    @Override
-    protected void doSave() {
-        baseNode.putDouble(name, property.getValue().doubleValue());
-    }
+  @Override
+  protected void doSave() {
+    baseNode.putDouble(name, property.getValue().doubleValue());
+  }
 
-    @Override
-    protected void doSave(Double value) {
-        baseNode.putDouble(name, value);
-    }
+  @Override
+  protected void doSave(Double value) {
+    baseNode.putDouble(name, value);
+  }
 
-    @Override
-    public Double getValue() {
-        return property.getValue().doubleValue();
-    }
-
+  @Override
+  public Double getValue() {
+    return property.getValue().doubleValue();
+  }
 }

@@ -7,105 +7,107 @@
  */
 package co.bitshifted.protofx.core.prefs;
 
-import javafx.beans.property.Property;
-
 import java.util.Optional;
 import java.util.prefs.Preferences;
+import javafx.beans.property.Property;
 
 /**
  * Base class for all preference entries.
  *
  * @param <T> preference value type
  */
-public abstract  class BasePreferenceEntry<T>  implements PendingValuePreference<T>{
+public abstract class BasePreferenceEntry<T> implements PendingValuePreference<T> {
 
-    protected final Property<T> property;
-    protected final String name;
-    protected final Preferences baseNode;
-    protected Optional<T> pendingValue;
+  protected final Property<T> property;
+  protected final String name;
+  protected final Preferences baseNode;
+  protected Optional<T> pendingValue;
 
-    /**
-     * Creates a new base preference entry.
-     * @param root the root node for the preference
-     * @param name the name of the preference
-     * @param defaultValue the default value if the preference is not set
-     */
-    protected BasePreferenceEntry(String root, String name, T defaultValue) {
-        this.name = name;
-        this.baseNode = Preferences.userRoot().node(root);
-        this.property = createProperty(defaultValue);
-        property.addListener((observableValue, oldValue, newValue) -> save());
-        this.pendingValue = Optional.empty();
+  /**
+   * Creates a new base preference entry.
+   *
+   * @param root the root node for the preference
+   * @param name the name of the preference
+   * @param defaultValue the default value if the preference is not set
+   */
+  protected BasePreferenceEntry(String root, String name, T defaultValue) {
+    this.name = name;
+    this.baseNode = Preferences.userRoot().node(root);
+    this.property = createProperty(defaultValue);
+    property.addListener((observableValue, oldValue, newValue) -> save());
+    this.pendingValue = Optional.empty();
+  }
+
+  /**
+   * Creates a property for the preference.
+   *
+   * @param defaultValue the default value
+   * @return the property
+   */
+  protected abstract Property<T> createProperty(T defaultValue);
+
+  /** Saves the current value of the preference. */
+  protected abstract void doSave();
+
+  /**
+   * Saves the given value of the preference.
+   *
+   * @param value the value to save
+   */
+  protected abstract void doSave(T value);
+
+  /**
+   * Returns the current value of the preference.
+   *
+   * @return the current value
+   */
+  public T getValue() {
+    return property.getValue();
+  }
+
+  @Override
+  public void save() {
+    if (pendingValue.isPresent()) {
+      property.setValue(pendingValue.get());
+      pendingValue = Optional.empty();
     }
+    doSave();
+  }
 
-    /**
-     * Creates a property for the preference.
-     * @param defaultValue the default value
-     * @return the property
-     */
-    protected abstract Property<T> createProperty(T defaultValue);
-
-    /**
-     * Saves the current value of the preference.
-     */
-    protected abstract void doSave();
-
-    /**
-     * Saves the given value of the preference.
-     * @param value the value to save
-     */
-    protected abstract void doSave(T value);
-
-    /**
-     * Returns the current value of the preference.
-     * @return the current value
-     */
-    public T getValue() {
-        return property.getValue();
+  /**
+   * Saves the given value of the preference.
+   *
+   * @param value the value to save
+   */
+  public void save(T value) {
+    if (pendingValue.isPresent()) {
+      pendingValue = Optional.empty();
     }
+    doSave(value);
+    property.setValue(value);
+  }
 
-    @Override
-    public void save() {
-        if(pendingValue.isPresent()) {
-            property.setValue(pendingValue.get());
-            pendingValue = Optional.empty();
-        }
-        doSave();
-    }
+  /**
+   * Returns the property for the preference.
+   *
+   * @return the property
+   */
+  public Property<T> getProperty() {
+    return property;
+  }
 
-    /**
-     * Saves the given value of the preference.
-     * @param value the value to save
-     */
-    public void save(T value) {
-        if(pendingValue.isPresent()) {
-            pendingValue = Optional.empty();
-        }
-        doSave(value);
-        property.setValue(value);
-    }
+  @Override
+  public void setPendingValue(T value) {
+    this.pendingValue = Optional.ofNullable(value);
+  }
 
-    /**
-     * Returns the property for the preference.
-     * @return the property
-     */
-    public Property<T> getProperty() {
-        return property;
-    }
+  @Override
+  public boolean hasPendingValue() {
+    return this.pendingValue.isPresent();
+  }
 
-    @Override
-    public void setPendingValue(T value) {
-        this.pendingValue = Optional.ofNullable(value);
-    }
-
-    @Override
-    public boolean hasPendingValue() {
-        return this.pendingValue.isPresent();
-    }
-
-    @Override
-    public void clearPendingValue() {
-        this.pendingValue = Optional.empty();
-    }
-
+  @Override
+  public void clearPendingValue() {
+    this.pendingValue = Optional.empty();
+  }
 }

@@ -8,34 +8,30 @@
 package co.bitshifted.protofx.core.prefs;
 
 /**
- * Defines preference item with "pending" value. This is a value that is being set for the preference,
- * but isnot stored into persistent storage until explicitly requested.
+ * Defines preference item with "pending" value. This is a value that is being set for the
+ * preference, but isnot stored into persistent storage until explicitly requested.
  *
  * @param <T> type of the preference value
  */
 public interface PendingValuePreference<T> {
 
-    /**
-     * Sets current value for the preference, but does not persist it.
-     *
-     * @param value value to set
-     */
-    void setPendingValue(T value);
+  /**
+   * Sets current value for the preference, but does not persist it.
+   *
+   * @param value value to set
+   */
+  void setPendingValue(T value);
 
-    /**
-     * Checks is preference has pending value.
-     *
-     * @return {@code true if pending value is set. {@code false} otherwise
-     */
-     boolean hasPendingValue();
+  /**
+   * Checks is preference has pending value.
+   *
+   * @return {@code true }if pending value is set. {@code false} otherwise
+   */
+  boolean hasPendingValue();
 
-    /**
-     * Resets pending value of the preference.
-     */
-    void clearPendingValue();
+  /** Resets pending value of the preference. */
+  void clearPendingValue();
 
-    /**
-     * Saves pending value into persistent storage.
-     */
-    void save();
+  /** Saves pending value into persistent storage. */
+  void save();
 }

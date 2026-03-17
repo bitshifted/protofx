@@ -79,7 +79,7 @@
         <!-- dependency versions -->
         <javafx.version>25.0.2</javafx.version>
         <junit.version>6.0.2</junit.version>
-        <mockito.version>5.21.0</mockito.version>
+        <mockito.version>5.23.0</mockito.version>
         <slf4j.version>2.0.17</slf4j.version>
         <guice.version>7.0.0</guice.version>
         <!-- Maven plugin versions -->
@@ -92,12 +92,12 @@
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <jacoco.plugin.version>0.8.13</jacoco.plugin.version>
         <flatten-maven-plugin.version>1.7.1</flatten-maven-plugin.version>
-        <spotless.version>2.44.5</spotless.version>
+        <spotless.version>3.3.0</spotless.version>
         <license-maven-plugin.version>5.0.0</license-maven-plugin.version>
         <central-publishing.version>0.8.0</central-publishing.version>
     </properties>
@@ -154,6 +154,12 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -308,7 +314,7 @@
                                 <include>src/test/java/**/*.java</include>
                             </includes>
                             <googleJavaFormat>
-                                <version>1.17.0</version>
+                                <version>1.35.0</version>
                                 <style>GOOGLE</style>
                             </googleJavaFormat>
                         </java>

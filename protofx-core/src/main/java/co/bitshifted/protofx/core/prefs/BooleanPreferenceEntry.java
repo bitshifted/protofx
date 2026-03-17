@@ -10,35 +10,32 @@ package co.bitshifted.protofx.core.prefs;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 
-/**
- * A preference entry for boolean values.
- */
+/** A preference entry for boolean values. */
 public class BooleanPreferenceEntry extends BasePreferenceEntry<Boolean> {
 
-    /**
-     * Creates a new boolean preference entry.
-     * @param root the root node for the preference
-     * @param name the name of the preference
-     * @param defaultValue the default value if the preference is not set
-     */
-    public BooleanPreferenceEntry(String root, String name, Boolean defaultValue){
-        super(root, name, defaultValue);
-    }
+  /**
+   * Creates a new boolean preference entry.
+   *
+   * @param root the root node for the preference
+   * @param name the name of the preference
+   * @param defaultValue the default value if the preference is not set
+   */
+  public BooleanPreferenceEntry(String root, String name, Boolean defaultValue) {
+    super(root, name, defaultValue);
+  }
 
+  @Override
+  protected Property<Boolean> createProperty(Boolean defaultValue) {
+    return new SimpleBooleanProperty(defaultValue);
+  }
 
-    @Override
-    protected Property<Boolean> createProperty(Boolean defaultValue) {
-        return new SimpleBooleanProperty(defaultValue);
-    }
+  @Override
+  protected void doSave() {
+    baseNode.putBoolean(name, property.getValue());
+  }
 
-    @Override
-    protected void doSave() {
-        baseNode.putBoolean(name, property.getValue());
-    }
-
-    @Override
-    protected void doSave(Boolean value) {
-        baseNode.putBoolean(name, value);
-    }
-
+  @Override
+  protected void doSave(Boolean value) {
+    baseNode.putBoolean(name, value);
+  }
 }

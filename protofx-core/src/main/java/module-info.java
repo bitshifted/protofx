@@ -6,11 +6,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 module co.bitshifted.protofx.core {
-    exports co.bitshifted.protofx.core.prefs;
-    exports co.bitshifted.protofx.core.di;
-    requires java.prefs;
-    requires javafx.base;
-    requires jakarta.inject;
-    requires com.google.guice;
-    requires org.slf4j;
+  exports co.bitshifted.protofx.core.prefs;
+  exports co.bitshifted.protofx.core.di;
+  exports co.bitshifted.protofx.core.l10n;
+
+  requires java.prefs;
+  requires javafx.base;
+  requires jakarta.inject;
+  requires com.google.guice;
+  requires org.slf4j;
 }

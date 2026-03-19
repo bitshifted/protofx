@@ -9,6 +9,7 @@ module co.bitshifted.protofx.core {
   exports co.bitshifted.protofx.core.prefs;
   exports co.bitshifted.protofx.core.di;
   exports co.bitshifted.protofx.core.l10n;
+  exports co.bitshifted.protofx.core.property;
 
   requires java.prefs;
   requires javafx.base;

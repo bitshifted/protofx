@@ -14,9 +14,13 @@ module co.bitshifted.protofx.core {
   exports co.bitshifted.protofx.core.prefs;
   exports co.bitshifted.protofx.core.process;
   exports co.bitshifted.protofx.core.property;
+  exports co.bitshifted.protofx.core.view;
 
   requires java.prefs;
   requires javafx.base;
+  requires javafx.graphics;
+  requires javafx.controls;
+  requires javafx.fxml;
   requires jakarta.inject;
   requires com.google.guice;
   requires org.slf4j;

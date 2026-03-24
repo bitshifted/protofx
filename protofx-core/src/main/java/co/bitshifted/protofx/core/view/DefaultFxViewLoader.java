@@ -23,8 +23,12 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultFxViewLoader implements FxViewLoader {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFxViewLoader.class);
 
   private final ResourceBundleManager resourceBundleManager;
 

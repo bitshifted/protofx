@@ -25,7 +25,7 @@ public @interface FxView {
    *
    * @return view name
    */
-  String name() default "";
+  String name();
 
   /**
    * Name of the resource bundle containing resources for the view (strings, images etc.)

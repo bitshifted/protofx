@@ -25,10 +25,6 @@
     <name>ProtoFX Core</name>
     <description>ProtoFX Core module</description>
 
-    <properties>
-        <revision>0.0.0-SNAPSHOT</revision>
-    </properties>
-
 
     <dependencies>
         <dependency>

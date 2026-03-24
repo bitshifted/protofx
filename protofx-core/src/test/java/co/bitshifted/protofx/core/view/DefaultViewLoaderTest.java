@@ -9,7 +9,11 @@ package co.bitshifted.protofx.core.view;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import co.bitshifted.protofx.core.l10n.ObservableResourceBundle;
 import co.bitshifted.protofx.core.l10n.ResourceBundleManager;
+import java.util.ResourceBundle;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,5 +39,25 @@ public class DefaultViewLoaderTest {
     var node = viewLoader.loadView(view);
     assertNotNull(node);
     assertTrue(node instanceof VBox);
+  }
+
+  @Test
+  void shouldLoadAnnotatedView() {
+    var view = new SimpleAnnotatedView();
+    var node = viewLoader.loadView(view);
+    assertNotNull(node);
+    assertTrue(node instanceof VBox);
+  }
+
+  @Test
+  void shouldLoadFxmlView() {
+    Mockito.when(resourceBundleManager.loadResourceBundle("test"))
+        .thenReturn(new ObservableResourceBundle(ResourceBundle.getBundle("test")));
+    var view = new SimpleFxmlView();
+    var node = viewLoader.loadView(view);
+    assertNotNull(node);
+    assertTrue(node instanceof HBox);
+    var label = (Label) ((HBox) node).getChildren().get(0);
+    assertEquals("Hello", label.getText());
   }
 }

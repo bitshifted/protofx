@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
  */
 public class DefaultApplicationConfig implements ApplicationConfig {
 
-  public static final String DEFAULT_LOCALE = "en_US";
+  public static final String DEFAULT_LOCALE = "en";
 
   @Override
   public String defaultPreferenceRootNode() {

@@ -16,4 +16,11 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface EventBusSubscriptionHandler {}
+public @interface EventBusSubscriptionHandler {
+  /**
+   * Denotes that annotated event handler should be a singleton
+   *
+   * @return {@code true} if annotated event handler should be a singleton, {@code false} otherwise
+   */
+  boolean singleton() default true;
+}

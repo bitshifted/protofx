@@ -14,6 +14,7 @@ module co.bitshifted.protofx.core {
   exports co.bitshifted.protofx.core.prefs;
   exports co.bitshifted.protofx.core.process;
   exports co.bitshifted.protofx.core.property;
+  exports co.bitshifted.protofx.core.service;
   exports co.bitshifted.protofx.core.view;
 
   requires java.prefs;

@@ -46,6 +46,7 @@
 
     <modules>
         <module>protofx-core</module>
+        <module>protofx-ui</module>
     </modules>
 
     <properties>

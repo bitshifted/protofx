@@ -56,15 +56,11 @@ public class DefaultLocaleManager implements LocaleManager {
   @Override
   public Locale localeFromString(String input) {
     var parts = input.split("_");
-    if (parts.length == 1) {
-      return new Locale(parts[0]);
-    }
-    if (parts.length == 2) {
-      return new Locale(parts[0], parts[1]);
-    }
-    if (parts.length == 3) {
-      return new Locale(parts[0], parts[1], parts[2]);
-    }
-    throw new IllegalStateException("Invalid locale string: " + input);
+    return switch (parts.length) {
+        case 1 -> new Locale(parts[0]);
+        case 2 -> new Locale(parts[0], parts[1]);
+        case 3 -> new Locale(parts[0], parts[1], parts[2]);
+        default ->  throw new IllegalArgumentException("Invalid locale string: " + input);
+    };
   }
 }

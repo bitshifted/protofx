@@ -13,6 +13,8 @@ import co.bitshifted.protofx.core.prefs.StringPreferenceEntry;
 import jakarta.inject.Inject;
 import java.util.List;
 import java.util.Locale;
+
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

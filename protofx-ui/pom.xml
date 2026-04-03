@@ -81,5 +81,9 @@
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -25,4 +25,5 @@ module co.bitshifted.protofx.core {
   requires jakarta.inject;
   requires com.google.guice;
   requires org.slf4j;
+    requires org.junit.jupiter.api;
 }

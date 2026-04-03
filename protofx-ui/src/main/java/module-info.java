@@ -9,11 +9,11 @@ module co.bitshifted.protofx.ui {
   exports co.bitshifted.protofx.ui.di;
   exports co.bitshifted.protofx.ui.l10n;
 
-    requires co.bitshifted.protofx.core;
+  requires co.bitshifted.protofx.core;
   requires java.base;
   requires javafx.controls;
+  requires javafx.graphics;
   requires jakarta.inject;
   requires com.google.guice;
   requires org.slf4j;
 }
-u

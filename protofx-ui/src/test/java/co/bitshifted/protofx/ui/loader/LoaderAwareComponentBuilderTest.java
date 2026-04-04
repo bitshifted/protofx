@@ -74,20 +74,21 @@ class LoaderAwareComponentBuilderTest {
   @Test
   void testWithResources() {
     LoaderAwareComponentBuilder<Void> builder = LoaderAwareComponentBuilder.builder();
-    builder.withResources(mockResourceBundle, "key");
+    builder.withResources(mockResourceBundle, "key", null);
     assertNotNull(builder);
   }
 
   @Test
   void testWithResourcesThrowsNPEWhenResourceBundleNull() {
     LoaderAwareComponentBuilder<Void> builder = LoaderAwareComponentBuilder.builder();
-    assertThrows(NullPointerException.class, () -> builder.withResources(null, "key"));
+    assertThrows(NullPointerException.class, () -> builder.withResources(null, "key", null));
   }
 
   @Test
   void testWithResourcesThrowsNPEWhenLoaderTextKeyNull() {
     LoaderAwareComponentBuilder<Void> builder = LoaderAwareComponentBuilder.builder();
-    assertThrows(NullPointerException.class, () -> builder.withResources(mockResourceBundle, null));
+    assertThrows(
+        NullPointerException.class, () -> builder.withResources(mockResourceBundle, null, null));
   }
 
   @Test
@@ -147,7 +148,7 @@ class LoaderAwareComponentBuilderTest {
             .withExecutorService(mockExecutorService)
             .withTask(dummyTask)
             .withContent(content)
-            .withResources(mockResourceBundle, key)
+            .withResources(mockResourceBundle, key, null)
             .build();
 
     assertNotNull(component);

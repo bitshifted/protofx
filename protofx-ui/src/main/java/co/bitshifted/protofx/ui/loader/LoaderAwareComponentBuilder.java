@@ -23,8 +23,10 @@ import javafx.scene.Node;
 public class LoaderAwareComponentBuilder<T> {
 
   private String loaderText = "Loading...";
+  private String errorText = "Loading failed";
   private ObservableResourceBundle resourceBundle;
   private String loaderTextKey;
+  private String errorTextKey;
   private ExecutorService executorService;
   private Task<T> task;
   private Node content;
@@ -50,16 +52,22 @@ public class LoaderAwareComponentBuilder<T> {
   }
 
   public LoaderAwareComponentBuilder withResources(
-      ObservableResourceBundle resourceBundle, String loaderTextKey) {
+      ObservableResourceBundle resourceBundle, String loaderTextKey, String errorTextKey) {
     Objects.requireNonNull(resourceBundle);
     Objects.requireNonNull(loaderTextKey);
     this.resourceBundle = resourceBundle;
     this.loaderTextKey = loaderTextKey;
+    this.errorTextKey = errorTextKey;
     return this;
   }
 
   public LoaderAwareComponentBuilder withLoaderText(String loaderText) {
     this.loaderText = loaderText;
+    return this;
+  }
+
+  public LoaderAwareComponentBuilder withErrorText(String errorText) {
+    this.errorText = errorText;
     return this;
   }
 
@@ -84,9 +92,10 @@ public class LoaderAwareComponentBuilder<T> {
     }
     LoaderAwareComponent<T> component;
     if (resourceBundle != null && loaderTextKey != null) {
-      component = new LoaderAwareComponent<T>(resourceBundle, loaderTextKey, executorService);
+      component =
+          new LoaderAwareComponent<T>(resourceBundle, loaderTextKey, errorTextKey, executorService);
     } else {
-      component = new LoaderAwareComponent<T>(loaderText, executorService);
+      component = new LoaderAwareComponent<T>(loaderText, errorText, executorService);
     }
     component.setContent(content);
     component.setLoadingTask(task);

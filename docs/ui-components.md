@@ -26,3 +26,19 @@ class MyView {
     }
 }
 ```
+
+## Loader component
+
+Use this component to display a progress indication until another component is loaded. This is useful for components that take a long time
+to initialize (eg. reading large files, downloading content etc.).
+
+```java
+ var task = new LongRunningTask();
+    var content = new TextField("test");
+    var component =
+        LoaderAwareComponentBuilder.builder()
+            .withExecutorService(executorService)
+            .withTask(task)
+            .withContent(content)
+            .build();
+```

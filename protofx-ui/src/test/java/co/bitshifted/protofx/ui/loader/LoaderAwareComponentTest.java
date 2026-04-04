@@ -23,7 +23,7 @@ public class LoaderAwareComponentTest {
 
   @Test
   void shouldCreateCorrectLoaderComponent() {
-    var component = new LoaderAwareComponent("Loader", executorService);
+    var component = new LoaderAwareComponent("Loader", "Loading failed", executorService);
     var content = new Label("Content");
     component.setContent(content);
     var children = component.getChildren();

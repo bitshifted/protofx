@@ -39,18 +39,27 @@ public class LoaderAwareComponent<T> extends StackPane {
 
   private Task<T> loadingTask;
 
+  /**
+   * Creates new instance of the components.
+   *
+   * @param resourceBundle resource bundle containing text property
+   * @param loaderTextKey key of the text property
+   * @param executorService executor service used to run background task
+   */
   public LoaderAwareComponent(
       ObservableResourceBundle resourceBundle,
       String loaderTextKey,
+      String errorTextKey,
       ExecutorService executorService) {
-    this.loaderView = new LoaderView(resourceBundle, loaderTextKey);
+    this.loaderView = new LoaderView(resourceBundle, loaderTextKey, errorTextKey);
     this.executorService = executorService;
     setAlignment(Pos.CENTER);
     getChildren().addAll(loaderView);
   }
 
-  public LoaderAwareComponent(String loaderText, ExecutorService executorService) {
-    this.loaderView = new LoaderView(loaderText);
+  public LoaderAwareComponent(
+      String loaderText, String errorText, ExecutorService executorService) {
+    this.loaderView = new LoaderView(loaderText, errorText);
     this.executorService = executorService;
     setAlignment(Pos.CENTER);
     getChildren().addAll(loaderView);
@@ -67,7 +76,10 @@ public class LoaderAwareComponent<T> extends StackPane {
           getChildren().remove(loaderView);
         });
     this.loadingTask.setOnFailed(
-        _ -> LOGGER.error("Loading task failed", loadingTask.getException()));
+        _ -> {
+          LOGGER.error("Loading task failed", loadingTask.getException());
+          loaderView.showErrorMessage();
+        });
   }
 
   public Task<T> getLoadingTask() {

@@ -77,4 +77,30 @@ public class LoaderAwareComponentIntegrationTest {
     assertEquals(1, component.getChildren().size());
     assertTrue(component.getChildren().get(0) instanceof TextField);
   }
+
+  @Test
+  void shouldShowErrorMessageOnTaskFailure() {
+    var task = new FailingTask();
+    var content = new TextField("test");
+    var component =
+        LoaderAwareComponentBuilder.builder()
+            .withExecutorService(executorService)
+            .withTask(task)
+            .withContent(content)
+            .build();
+    // verify that loader view is on top
+    assertTrue(component.getChildren().get(0) instanceof LoaderView);
+    component.startTask();
+    Awaitility.await().atMost(Duration.ofSeconds(10)).until(task::isDone);
+    assertEquals(2, component.getChildren().size());
+    assertTrue(component.getChildren().get(0) instanceof LoaderView);
+    var loaderView = (LoaderView) component.getChildren().get(0);
+    var errorLabel =
+        loaderView.getChildren().stream()
+            .filter(node -> "error-label".equals(node.getId()))
+            .findFirst()
+            .orElse(null);
+    assertNotNull(errorLabel);
+    assertTrue(errorLabel.isVisible());
+  }
 }

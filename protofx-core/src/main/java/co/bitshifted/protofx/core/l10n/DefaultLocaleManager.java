@@ -13,8 +13,6 @@ import co.bitshifted.protofx.core.prefs.StringPreferenceEntry;
 import jakarta.inject.Inject;
 import java.util.List;
 import java.util.Locale;
-
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,10 +57,10 @@ public class DefaultLocaleManager implements LocaleManager {
   public Locale localeFromString(String input) {
     var parts = input.split("_");
     return switch (parts.length) {
-        case 1 -> new Locale(parts[0]);
-        case 2 -> new Locale(parts[0], parts[1]);
-        case 3 -> new Locale(parts[0], parts[1], parts[2]);
-        default ->  throw new IllegalArgumentException("Invalid locale string: " + input);
+      case 1 -> new Locale(parts[0]);
+      case 2 -> new Locale(parts[0], parts[1]);
+      case 3 -> new Locale(parts[0], parts[1], parts[2]);
+      default -> throw new IllegalArgumentException("Invalid locale string: " + input);
     };
   }
 }

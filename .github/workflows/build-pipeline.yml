@@ -22,9 +22,10 @@ jobs:
       - name: Check code style
         run: |
           mvn spotless:check
-      - name: Build and test
+      - name: Build and test (with xvfb)
         run: |
-          mvn clean install
+          sudo apt-get install -y xvfb && \
+          xvfb-run mvn clean install
   release-maven-central:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}

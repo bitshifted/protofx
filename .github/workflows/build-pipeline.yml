@@ -18,13 +18,14 @@ jobs:
           cache: 'maven'
       - name: Check license headers
         run: |
-          mvn license:check
+          ./mvnw license:check
       - name: Check code style
         run: |
-          mvn spotless:check
-      - name: Build and test
+          ./mvnw spotless:check
+      - name: Build and test (with xvfb)
         run: |
-          mvn clean install
+          sudo apt-get install -y xvfb && \
+          xvfb-run ./mvnw clean install
   release-maven-central:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
@@ -56,7 +57,7 @@ jobs:
           initial_version: 0.1.0
       - name: Release to Maven repo
         run: |
-          mvn -P release -Dgpg.keyname=${{ secrets.GPG_KEY_NAME }} -Dgpg.passphrase=${{ secrets.MAVEN_SIGNING_KEY_PASSPHRASE }} \
+          xvfb-run ./mvnw -P release -Dgpg.keyname=${{ secrets.GPG_KEY_NAME }} -Dgpg.passphrase=${{ secrets.MAVEN_SIGNING_KEY_PASSPHRASE }} \
               -Drevision=${{ steps.calculate-version.outputs.version-string }} deploy
         env:
           MVN_CENTRAL_USERNAME: ${{ vars.MVN_CENTRAL_USERNAME }}
